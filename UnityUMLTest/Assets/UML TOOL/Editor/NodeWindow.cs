@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
-
+//doxygen
 namespace UnityEngine.Scripting.UML
 {
     public class NodeWindow : EditorWindow
@@ -13,7 +13,7 @@ namespace UnityEngine.Scripting.UML
         private event DrawInheritance drawInheritance;
         private SaveNodes saveNode;
         private Vector2 mousePosition;
-
+        
         [MenuItem("Custom Tools/UML Window #u ")]
         private static void Init()
         {
@@ -24,10 +24,12 @@ namespace UnityEngine.Scripting.UML
             {
                 umlWindow.saveNode = (SaveNodes)AssetDatabase.LoadAssetAtPath("Assets/SaveNode.asset", typeof(SaveNodes));
                 umlWindow.nodes = umlWindow.saveNode.Nodes;
-                umlWindow.inheritance = umlWindow.saveNode.Inheritance;
 
                 if (umlWindow.inheritance != null)
+                {
+                    umlWindow.inheritance = umlWindow.saveNode.Inheritance;
                     umlWindow.drawInheritance();
+                }
             } catch
             {
                 umlWindow.saveNode = ScriptableObject.CreateInstance(typeof(SaveNodes)) as SaveNodes;
@@ -173,9 +175,11 @@ namespace UnityEngine.Scripting.UML
         public void OnDisable()
         {
             if (drawInheritance != null)
+            {
                 drawInheritance -= inheritance.DrawInheritances;
-
                 saveNode.Inheritance = inheritance;
+            }
+
             if (nodes.Count > 0)
                 saveNode.Nodes = nodes;
 
